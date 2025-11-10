@@ -10,6 +10,8 @@ load_dotenv()
 @pytest.fixture(scope="session")
 def base_url() -> str:
     url = os.getenv("API_HOST")
+    if not url:
+        pytest.fail("Переменная окружения не задана в .env файле")
     return f"{url}/api"
 
 @pytest.fixture(scope="session")
