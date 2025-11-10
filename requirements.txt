@@ -1,0 +1,7 @@
+requests
+pydantic
+pytest
+pytest-xdist
+allure-pytest
+python-dotenv
+black
