@@ -1,0 +1,17 @@
+# Виртуальное окружение
+venv/
+.env
+.venv
+
+# Python кеш
+__pycache__/
+*.pyc
+
+# Отчеты
+allure-results/
+allure-report/
+html-report/
+
+# Настройки IDE
+.idea/
+.vscode/
