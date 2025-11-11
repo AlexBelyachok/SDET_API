@@ -31,10 +31,13 @@ def entity_payload() -> EntityRequest:
 @pytest.fixture(scope="function")
 def created_entity(api_client: ApiClient, entity_payload: EntityRequest) -> tuple:
     entity_id = None
-    with allure.step(
-        "Предварительное условие: создание сущности со случайными данными"
-    ):
+    with allure.step("Pre-condition: Создание сущности со случайными данными"):
         try:
+            allure.attach(
+                body=entity_payload.model_dump_json(indent=2),
+                name="Сгенерированный Payload для создания",
+                attachment_type=allure.attachment_type.JSON,
+            )
             entity_id = api_client.create_entity(entity_payload)
             assert isinstance(
                 entity_id, int
@@ -44,8 +47,7 @@ def created_entity(api_client: ApiClient, entity_payload: EntityRequest) -> tupl
 
     yield entity_id, entity_payload
 
-    with allure.step(f"Очистка: удаление сущности с ID {entity_id}"):
+    with allure.step(f"Post-condition: Очистка (удаление сущности с ID {entity_id})"):
         if entity_id:
             response = api_client.delete_entity(entity_id)
-            # Вызываем просто как функцию
             assert_status_code(response, [204, 404, 500])
