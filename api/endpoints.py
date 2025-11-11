@@ -2,6 +2,7 @@ class ApiEndpoints:
     """
     Класс для хранения и формирования эндпоинтов API.
     """
+
     create_entity = "/create"
     get_all_entities = "/getAll"
 

@@ -6,6 +6,7 @@ from typing import List
 from api.models import EntityRequest, EntityResponse, GetAllResponse
 from api.endpoints import ApiEndpoints
 
+
 class ApiClient:
     def __init__(self, base_url: str):
         self.base_url = base_url
@@ -21,12 +22,20 @@ class ApiClient:
         """Создает сущность и возвращает ее ID."""
         url = f"{self.base_url}{ApiEndpoints.create_entity}"
         payload_dict = payload.model_dump()
-        allure.attach(json.dumps(payload_dict, indent=2), "Request Body", allure.attachment_type.JSON)
+        allure.attach(
+            json.dumps(payload_dict, indent=2),
+            "Request Body",
+            allure.attachment_type.JSON,
+        )
 
         response = self._request("POST", url, json=payload_dict)
         response.raise_for_status()
         entity_id = response.json()
-        allure.attach(str(entity_id), f"ID созданной сущности: {entity_id}", allure.attachment_type.TEXT)
+        allure.attach(
+            str(entity_id),
+            f"ID созданной сущности: {entity_id}",
+            allure.attachment_type.TEXT,
+        )
         return entity_id
 
     @allure.step("Получение сущности по ID (GET /get/{entity_id})")
@@ -50,7 +59,11 @@ class ApiClient:
         """Обновляет сущность. Возвращает полный объект Response для проверки статус-кода."""
         url = f"{self.base_url}{ApiEndpoints.update_entity_by_id(entity_id)}"
         payload_dict = payload.model_dump()
-        allure.attach(json.dumps(payload_dict, indent=2), "Request Body", allure.attachment_type.JSON)
+        allure.attach(
+            json.dumps(payload_dict, indent=2),
+            "Request Body",
+            allure.attachment_type.JSON,
+        )
         return self._request("PATCH", url, json=payload_dict)
 
     @allure.step("Удаление сущности по ID (DELETE /delete/{entity_id})")
