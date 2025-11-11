@@ -1,0 +1,69 @@
+name: Run API Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout tests repository
+        uses: actions/checkout@v5
+
+      - name: Checkout API repository
+        uses: actions/checkout@v5
+        with:
+          repository: bondarenkokate73/simbirsoft_sdet_project
+          path: api_project
+
+      - name: Build and run API container
+        run: docker compose -f api_project/docker-compose.yaml up -d
+
+      - name: Wait for API to be ready
+        run: |
+          echo "Waiting for API service at http://localhost:8080..."
+          timeout 60s bash -c 'until curl -s http://localhost:8080/api/getAll > /dev/null; do
+            echo "API not ready, retrying in 5s..."
+            sleep 5
+          done'
+          echo "API is ready!"
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install test dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Pytest
+        run: pytest --alluredir=allure-results
+        env:
+          API_HOST: http://localhost:8080
+
+      - name: Stop API container
+        if: always()
+        run: docker compose -f api_project/docker-compose.yaml down
+
+      - name: Generate Allure report
+        if: always()
+        uses: simple-elf/allure-report-action@v1.13
+        with:
+          allure_results: allure-results
+          allure_report: allure-report
+          gh_pages: gh-pages
+          allure_history: allure-history
+
+      - name: Deploy report to GitHub Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-history
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"
