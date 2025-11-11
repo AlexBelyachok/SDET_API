@@ -1,0 +1,12 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","4","Обновление сущности","tests","Tue Nov 11 08:55:50 UTC 2025","passed","Tue Nov 11 08:55:51 UTC 2025","TestEntityAPI","test_api","",""
+"","3","Фильтрация списка сущностей по заголовку","tests","Tue Nov 11 08:55:51 UTC 2025","passed","Tue Nov 11 08:55:51 UTC 2025","TestEntityAPI","test_api","",""
+"
+        Тест-кейс:
+        1. Создать сущность.
+        2. Удалить ее.
+        3. Запросить общий список и убедиться, что ID удаленной сущности там нет.
+        ","5","Проверка отсутствия удаленной сущности в общем списке","tests","Tue Nov 11 08:55:51 UTC 2025","passed","Tue Nov 11 08:55:51 UTC 2025","TestEntityAPI","test_api","",""
+"","2","Получение сущности по ID","tests","Tue Nov 11 08:55:50 UTC 2025","passed","Tue Nov 11 08:55:50 UTC 2025","TestEntityAPI","test_api","",""
+"","6","Создание и удаление сущности","tests","Tue Nov 11 08:55:51 UTC 2025","passed","Tue Nov 11 08:55:51 UTC 2025","TestEntityAPI","test_api","",""
+"","1","Проверка наличия сущности в общем списке","tests","Tue Nov 11 08:55:51 UTC 2025","passed","Tue Nov 11 08:55:51 UTC 2025","TestEntityAPI","test_api","",""

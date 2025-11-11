@@ -1,6 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","3","Получение сущности по ID","tests","Mon Nov 10 21:21:10 UTC 2025","passed","Mon Nov 10 21:21:10 UTC 2025","TestEntityAPI","test_api","",""
-"","2","Проверка наличия сущности в общем списке","tests","Mon Nov 10 21:21:10 UTC 2025","passed","Mon Nov 10 21:21:10 UTC 2025","TestEntityAPI","test_api","",""
-"","2","Фильтрация списка сущностей по заголовку","tests","Mon Nov 10 21:21:10 UTC 2025","passed","Mon Nov 10 21:21:10 UTC 2025","TestEntityAPI","test_api","",""
-"","6","Создание и удаление сущности","tests","Mon Nov 10 21:21:10 UTC 2025","passed","Mon Nov 10 21:21:10 UTC 2025","TestEntityAPI","test_api","",""
-"","5","Обновление сущности","tests","Mon Nov 10 21:21:10 UTC 2025","passed","Mon Nov 10 21:21:10 UTC 2025","TestEntityAPI","test_api","",""
